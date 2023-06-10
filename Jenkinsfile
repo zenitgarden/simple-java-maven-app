@@ -1,23 +1,30 @@
-node {
-    docker.image('maven:3.9.0').inside('-v /root/.m2:/root/.m2') {
+pipeline {
+    agent {
+        docker {
+            image 'maven:3.9.0'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
+    stages {
         stage('Build') {
-            sh 'mvn -f "/home/zenit/dicoding/simple-java-maven-app/pom.xml" compile'
-            sh 'mvn -B -DskipTests clean package'
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
         }
         stage('Test') {
-            try {
+            steps {
                 sh 'mvn test'
             }
-            catch(e) {
-                echo 'an error occured'
-                throw e
-            }
-            finally {
-                junit 'target/surefire-reports/*.xml'
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
             }
         }
         stage('Deliver') {
-            sh './jenkins/scripts/deliver.sh'
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+            }
         }
     }
 }
