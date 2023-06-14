@@ -25,7 +25,7 @@ node {
         echo '--------------------------Deliver process----------------------------'
          withCredentials([string(credentialsId:'remote-target', variable:'REMOTE_TARGET'), string(credentialsId:'user', variable:'USER')]) {
             sshagent (credentials: ['ssh-agent']) {
-                sh 'ssh -o StrictHostKeyChecking=no -l ${USER} ${REMOTE_TARGET} cd myfolder/simple-java-maven-app; git pull;'
+                sh 'ssh -o StrictHostKeyChecking=no -l ${USER} ${REMOTE_TARGET} cd myfolder/simple-java-maven-app; git pull origin master;'
                 sh 'ssh -o StrictHostKeyChecking=no -l ${USER} ${REMOTE_TARGET} ls'
             }
         }
