@@ -25,8 +25,8 @@ node {
         echo '--------------------------Deliver process----------------------------'
          withCredentials([string(credentialsId:'remote-target', variable:'REMOTE_TARGET'), string(credentialsId:'user', variable:'USER')]) {
             sshagent (credentials: ['ssh-agent']) {
-                sh 'ssh -o StrictHostKeyChecking=no -l ${USER} ${REMOTE_TARGET} cd dicoding/simple-java-maven-app; ls;git pull; sudo docker build -t my-image .;'
-                sh 'ssh -o StrictHostKeyChecking=no -l ${USER} ${REMOTE_TARGET} sudo docker run --rm --name mine my-image'
+                sh 'ssh -o StrictHostKeyChecking=no -l ${USER} ${REMOTE_TARGET} cd dicoding/simple-java-maven-app; ls;'
+                sh 'ssh -o StrictHostKeyChecking=no -l ${USER} ${REMOTE_TARGET} whoami'
             }
         }
         sleep(time:1, unit:'MINUTES')
