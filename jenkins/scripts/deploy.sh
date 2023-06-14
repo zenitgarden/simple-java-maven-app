@@ -3,5 +3,6 @@ echo 'The following Maven command builds the project and packages the resulting 
 mvn package
 
 echo 'Run the project'
-echo 'The following Maven command run the jar file in target/my-app-1.0-SNAPSHOT.jar and the result prints "hello world"'
+echo 'The following Maven command run the jar file in target/my-app-1.0-SNAPSHOT.jar'
+echo 'the result prints "hello world"'
 java -jar target/my-app-1.0-SNAPSHOT.jar
