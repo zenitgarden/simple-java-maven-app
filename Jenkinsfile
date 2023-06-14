@@ -26,7 +26,7 @@ node {
          withCredentials([string(credentialsId:'remote-target', variable:'REMOTE_TARGET'), string(credentialsId:'user', variable:'USER')]) {
             sshagent (credentials: ['ssh-agent']) {
                 sh 'ssh -o StrictHostKeyChecking=no -l ${USER} ${REMOTE_TARGET} ls'
-                sh 'ssh -o StrictHostKeyChecking=no -l ${USER} ${REMOTE_TARGET} cd myfolder/simple-java-maven-app; ls;'
+                sh 'ssh -o StrictHostKeyChecking=no -l ${USER} ${REMOTE_TARGET} cd myfolder; ls; cd simple-java-maven-app;'
             }
         }
         sleep(time:1, unit:'MINUTES')
